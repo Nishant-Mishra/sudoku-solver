@@ -12,7 +12,7 @@ sample_board = [
     [0, 5, 0, 0, 2, 0, 0, 7, 0],
     [8, 0, 0, 4, 0, 0, 6, 0, 0],
     [0, 0, 2, 0, 1, 0, 0, 0, 3],
-    [5, 0, 0, 2, 0, 3, 0, 0, 7]
+    [5, 0, 0, 2, 0, 3, 8, 0, 7]
 ]
 
 
@@ -46,6 +46,19 @@ def solve1(board: List[List[int]]):
             return
 
     print("Solved in {:04d} steps".format(steps))
+
+
+def solve2(board: List[List[int]]):
+    for i in range(len(board)):
+        for j in range(len(board[0])):
+            if board[i][j] == 0:
+                for n in range(len(board) + 1):
+                    if check_valid(board, (i, j), n):
+                        board[i][j] = n
+                        solve2(board)
+                        board[i][j] = 0
+                return
+    print_board(board)
 
 
 def check_valid(board: List[List[int]], pos: Tuple[int, int], num: int) -> bool:
@@ -103,7 +116,7 @@ def print_board(board: List[List[int]]):
 def main():
     board = sample_board
     print_board(board)
-    solve1(board)
+    solve2(board)
     for i in range(len(board)):
         for j in range(len(board[0])):
             if not check_valid(board, (i, j), board[i][j]):
