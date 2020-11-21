@@ -1,5 +1,5 @@
 # sudoku-solver
-Python Iterative Sudoku Solver
+Python Iterative and Recursive Sudoku Solver
 
 Algorithm learnt through:
 
